@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0;
+            background: rgb(255, 255, 0);
+            text-align: center;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            font-size: 10px;
+        }
+        
+        .galery-item {
+            position: relative;
+            margin: 20px;
+            border: 5px solid rgb(240, 0, 0);
+            background: rgb(255, 255, 255);
+            display: inline-block;
+            min-width: 40px;
+            min-height: 40px;
+            border-radius: 10px;
+        }
+        
+        .galery-item:hover,
+        .galery-item:focus,
+        button:hover {
+            border: 5px solid rgb(0, 0, 0);
+            background: rgb(240, 0, 0);
+        }
+        
+        .galery-item-content {
+            border-radius: 5px;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .container {
+            border: 5px solid rgb(240, 0, 0);
+            border-style: dotted;
+        }
+        
+        button {
+            background-color: green;
+            border: 5px solid rgb(240, 0, 0);
+            border-radius: 10px;
+            margin: 20px;
+            color: white;
+            padding: 10px 30px;
+            text-align: center;
+            font-size: 20px;
+            outline: none;
+            cursor: pointer;
+        }
+        
+        span {
+            cursor: default;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button type="button" tabindex="-1">Add new block!</button>
+
+    <script>
+        // <div class="galery-item">
+        //   <div class="galery-item-content">
+        //     <span>1</span>
+        //   </div>
+        // </div>
+
+
+        var body = document.body;
+        var numBlocks = prompt('How many blocks do you want to be displayed ?', 50);
+        var container = document.createElement('div');
+        container.className = "container";
+        body.appendChild(container);
+        var selectedBlock;
+
+
+        function drawTheBlocks(strIndx, endIndx) {
+            for (var i = strIndx; i <= endIndx; i++) {
+                var galItemDiv = document.createElement('div');
+                galItemDiv.className = "galery-item";
+
+                var att = document.createAttribute("tabindex");
+                att.value = i;
+                galItemDiv.setAttributeNode(att);
+
+                container.appendChild(galItemDiv);
+
+                var galItemContDiv = document.createElement('div');
+                galItemContDiv.className = "galery-item-content";
+                galItemContDiv.innerHTML = "<span>" + i + "</span>";
+                galItemDiv.appendChild(galItemContDiv);
+            }
+            document.getElementsByClassName("galery-item")[0].focus();
+        }
+
+        drawTheBlocks(1, numBlocks);
+
+        container.onclick = function(event) {
+            var target = event.target;
+
+            while (target.className != 'container') {
+                if (target.className === 'galery-item') {
+                    highlight(target);
+                    return;
+                }
+                target = target.parentNode;
+            }
+        };
+
+        container.addEventListener("keyup", function(event) {
+            var target = event.target;
+            var targetCoords = target.getBoundingClientRect();
+            var marging = getComputedStyle(event.target).marginTop;
+
+            var targetCenter = {
+                x: targetCoords.left + (targetCoords.right - targetCoords.left) / 2,
+                y: targetCoords.top + (targetCoords.bottom - targetCoords.top) / 2
+            };
+
+            switch (event.keyCode) {
+                case 37: // left
+                    target.previousElementSibling ? target.previousElementSibling.focus() : undefined;
+                    return false;
+                case 38: // up
+                    var upperEl = document.elementFromPoint(targetCenter.x, targetCenter.y - (target.clientHeight + parseInt(marging, 10) * 2));
+                    upperEl ? upperEl.focus() : undefined;
+                    return false;
+                case 39: // right
+                    target.nextElementSibling ? target.nextElementSibling.focus() : undefined;
+                    return false;
+                case 40: // down
+                    var lowerEl = document.elementFromPoint(targetCenter.x, targetCenter.y + (target.clientHeight + parseInt(marging, 10) * 2));
+                    lowerEl ? lowerEl.focus() : undefined;
+                    return false;
+                case 13: // enter
+                    target.click();
+                    return false;
+            }
+        });
+
+        document.getElementsByTagName("button")[0].onclick = function(event) {
+            numBlocks++;
+            drawTheBlocks(numBlocks, numBlocks);
+        };
+
+
+        function highlight(element) {
+            if (selectedBlock) {
+                selectedBlock.style.border = "";
+                selectedBlock.style.backgroundColor = "";
+                selectedBlock.style.fontWeight = "";
+                selectedBlock.style.fontSize = "";
+            }
+            selectedBlock = element;
+            selectedBlock.style.border = "thick solid #0000FF";
+            selectedBlock.style.backgroundColor = "green";
+            selectedBlock.style.fontWeight = "bold";
+            selectedBlock.style.fontSize = "large";
+        }
+    </script>
+
+</body>
+
+</html>
