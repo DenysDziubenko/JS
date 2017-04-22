@@ -39,9 +39,8 @@ button:hover {
 }
 
 .highlited,
-.highlited:focus
-{
-    border : thick solid #0000FF;
+.highlited:focus {
+    border: thick solid #0000FF;
     background-color: green;
     font-weight: bold;
     font-size: large;

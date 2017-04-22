@@ -1,5 +1,5 @@
 var body = document.body;
-var numBlocks = 100;
+var numBlocks = 98;
 var container = document.createElement('div');
 container.className = "container";
 body.appendChild(container);
@@ -11,7 +11,7 @@ function drawTheBlocks(strIndx, endIndx) {
         var galItemDiv = document.createElement('div');
         galItemDiv.className = "galery-item";
 
-        var att = document.createAttribute("tabindex");
+        var att = document.createAttribute("id");
         att.value = i;
         galItemDiv.setAttributeNode(att);
 
@@ -22,7 +22,6 @@ function drawTheBlocks(strIndx, endIndx) {
         galItemContDiv.innerHTML = "<span>" + i + "</span>";
         galItemDiv.appendChild(galItemContDiv);
     }
-    document.getElementsByClassName("galery-item")[0].focus();
 }
 
 drawTheBlocks(1, numBlocks);
@@ -39,33 +38,35 @@ container.addEventListener("click", function(event) {
     }
 });
 
-container.addEventListener("keyup", function(event) {
-    var target = event.target;
-    var targetCoords = target.getBoundingClientRect();
-    var marging = getComputedStyle(event.target).marginTop;
+body.addEventListener("keyup", function() {
 
-    var targetCenter = {
-        x: targetCoords.left + (targetCoords.right - targetCoords.left) / 2,
-        y: targetCoords.top + (targetCoords.bottom - targetCoords.top) / 2
-    };
+    if (!selectedBlock) {
+        // Find first one and highlite it
+        highlight(document.getElementsByClassName("galery-item")[0]);
+    }
+
+    var selectedBlockWidth = selectedBlock.offsetWidth;
+    var selectedBlockMarging = parseInt(getComputedStyle(selectedBlock).marginTop);
+    var containerWidth = document.getElementsByClassName("container")[0].clientWidth;
+    var numOfBlocksInRow = parseInt(containerWidth / (selectedBlockWidth + selectedBlockMarging * 2));
+    var selectedBlockId = parseInt(selectedBlock.getAttribute("id"));
 
     switch (event.keyCode) {
         case 37: // left
-            target.previousElementSibling ? target.previousElementSibling.focus() : undefined;
+            var leftElem = document.getElementById(selectedBlockId - 1);
+            leftElem ? highlight(leftElem) : undefined;
             return false;
         case 38: // up
-            var upperEl = document.elementFromPoint(targetCenter.x, targetCenter.y - (target.clientHeight + parseInt(marging, 10) * 2));
-            upperEl ? upperEl.focus() : undefined;
+            var upperElem = document.getElementById(selectedBlockId - numOfBlocksInRow);
+            upperElem ? highlight(upperElem) : undefined;
             return false;
         case 39: // right
-            target.nextElementSibling ? target.nextElementSibling.focus() : undefined;
+            var rightElem = document.getElementById(selectedBlockId + 1);
+            rightElem ? highlight(rightElem) : undefined;
             return false;
         case 40: // down
-            var lowerEl = document.elementFromPoint(targetCenter.x, targetCenter.y + (target.clientHeight + parseInt(marging, 10) * 2));
-            lowerEl ? lowerEl.focus() : undefined;
-            return false;
-        case 13: // enter
-            target.click();
+            var lowerElem = document.getElementById(selectedBlockId + numOfBlocksInRow);
+            lowerElem ? highlight(lowerElem) : undefined;
             return false;
     }
 });
