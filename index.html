@@ -6,17 +6,35 @@
 </head>
 
 <body>
+    <div id="blocksApp">
+        <button id="button" type="button">Add new block!</button>
+        <div id="container" class="container">
+        </div>
+    </div>
 
-    <button type="button">Add new block!</button>
+    <script type="text/template" id="item-template">
+        <div class="galery-item-status <%= highlighted ? 'highlited' : '' %>"  id="<%- index %>">
+            <div class="galery-item-content">
+                <span><%- index %></span>
+                <div class="remove">x</div>
+            </div>
+        </div>
+    </script>
 
-    <!--template-->
-    <!--<div class="galery-item">-->
-    <!--      <div class="galery-item-content">-->
-    <!--        <span>1</span>-->
-    <!--      </div>-->
-    <!--    </div>-->
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/underscore.min.js"></script>
+    <script src="js/lib/backbone.min.js"></script>
+    <script src="js/lib/backbone.localStorage-min.js"></script>
+    <script src="js/models/blockModel.js"></script>
+    <script src="js/collections/blocksCollection.js"></script>
+    <script src="js/views/blockView.js"></script>
 
-    <script src="js/app.js"></script>
+    <script src="js/views/blocksView.js">
+        // TODO
+    </script>
+    <script src="js/backboneApp.js"></script>
+
+    <!--<script src="js/app.js"></script>-->
 
 </body>
 

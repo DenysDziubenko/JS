@@ -12,8 +12,8 @@ body {
     border: 5px solid rgb(240, 0, 0);
     background: rgb(255, 255, 255);
     display: inline-block;
-    min-width: 40px;
-    min-height: 40px;
+    min-width: 50px;
+    min-height: 50px;
     border-radius: 10px;
 }
 
@@ -22,6 +22,12 @@ body {
 button:hover {
     border: 5px solid rgb(0, 0, 0);
     background: rgb(240, 0, 0);
+}
+
+.remove:hover {
+    border: 1px solid rgb(0, 0, 0);
+    background: rgb(255, 255, 0);
+    border-radius: 5px;
 }
 
 .galery-item-content {
