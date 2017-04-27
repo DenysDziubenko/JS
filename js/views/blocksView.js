@@ -9,12 +9,13 @@ app.BlocksView = Backbone.View.extend({
     selectedBlock: undefined,
 
     initialize: function() {
-        this.blockIndex = 1;
         this.collection = new app.Blocks();
         this.listenTo(this.collection, 'add', this.addOne);
-        //this.listenTo(this.collection, 'reset', this.addAll);
-        $(document).on('keyup', this.highlightOnkeyUp.bind(this)); // workaround for the line 23
+        $(document).on('keyup', this.highlightOnkeyUp.bind(this)); // workaround for the line 24
         this.collection.fetch();
+        this.selectedBlock = this.collection.findWhere({
+            highlighted: true
+        });
     },
 
     events: {
@@ -24,15 +25,12 @@ app.BlocksView = Backbone.View.extend({
     },
 
     addBlock: function(e) {
-
         var blockData = {
             highlighted: false,
-            index: this.blockIndex
+            index: this.collection.size()
         };
 
-        var model = this.collection.create(blockData);
-        model.trigger("highlight", true);
-        this.blockIndex++;
+        this.collection.create(blockData);
     },
 
     addOne: function(block) {
@@ -60,49 +58,34 @@ app.BlocksView = Backbone.View.extend({
     },
 
     highlightEl: function(element) {
-
-        // TODO  highlight blocks changing the models in the collection
-        // var id = parseInt(element.firstElementChild.getAttribute("id"));
-
-        // this.collection.each(function(model) {
-        //     if (model.get("index") === id) {
-        //         model.save({
-        //             highlighted: true
-        //         });
-        //     }
-        // });
-        // this.collection.fetch();
-        // this.addAll();
-
-        // for (var key in this.collection.models) {
-        //     console.log('COLLECTION key' + key);
-        //     console.dir(this.collection.models[key]);
-
-        //     if (key) {
-        //     }
-        // }
-
+        var id = parseInt(element.firstElementChild.getAttribute("id"));
+        var self = this;
 
         if (this.selectedBlock) {
-            this.selectedBlock.classList.remove("highlited");
+            this.selectedBlock.trigger("highlight", false);
         }
-        this.selectedBlock = element;
-        this.selectedBlock.classList.add("highlited");
+
+        this.collection.each(function(model) {
+            if (model.get("index") === id) {
+                self.selectedBlock = model;
+                model.trigger("highlight", true);
+            }
+        });
     },
 
     highlightOnkeyUp: function() {
-
-
         if (!this.selectedBlock) {
             // Find first one and highlite it
-            this.highlightEl(document.getElementsByClassName("galery-item")[0]);
+            this.selectedBlock = this.collection.at(0);
+            this.collection.at(0).trigger("highlight", true);
         }
 
-        var selectedBlockWidth = this.selectedBlock.offsetWidth;
-        var selectedBlockMarging = parseInt(getComputedStyle(this.selectedBlock).marginTop);
+        var selectedBlockWidth = document.getElementsByClassName("galery-item")[0].offsetWidth;
+        var selectedBlockMarging = parseInt(getComputedStyle(document.getElementsByClassName("galery-item")[0]).marginTop);
         var containerWidth = document.getElementsByClassName("container")[0].clientWidth;
         var numOfBlocksInRow = parseInt(containerWidth / (selectedBlockWidth + selectedBlockMarging * 2));
-        var selectedBlockId = parseInt(this.selectedBlock.firstElementChild.getAttribute("id"));
+
+        var selectedBlockId = this.selectedBlock.get("index");
 
         switch (event.keyCode) {
             case 37: // left

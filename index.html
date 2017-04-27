@@ -13,9 +13,9 @@
     </div>
 
     <script type="text/template" id="item-template">
-        <div class="galery-item-status <%= highlighted ? 'highlited' : '' %>"  id="<%- index %>">
+        <div class="galery-item-status" id="<%- index %>">
             <div class="galery-item-content">
-                <span><%- index %></span>
+                <span class="<%= highlighted ? 'highlighted' : '' %>"><%- index %></span>
                 <div class="remove">x</div>
             </div>
         </div>

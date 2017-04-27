@@ -9,31 +9,30 @@ app.BlockView = Backbone.View.extend({
     className: 'galery-item',
     template: _.template($('#item-template').html()),
 
+    initialize: function() {
+        this.listenTo(this.model, "highlight", this.highlight);
+    },
+
     events: {
         'click .remove': 'deleteBlock',
     },
 
     deleteBlock: function() {
-        //Delete model
         this.model.destroy();
-
-        //Delete view
         this.remove();
     },
 
     render: function() {
         //this.el is what we defined in tagName. use $el to get access to jQuery html() function
         this.$el.html(this.template(this.model.attributes));
-
-        // TODO highlight blocks changing the models in the collection
-        // this.listenTo(this.model, "highlight", function (isHighlighted) {
-        //     console.log(isHighlighted);
-        // });
-
         return this;
     },
 
-    // TODO highlight blocks changing the models in the collection
-    highlight: function() {}
+    highlight: function(isHighlighted) {
+        isHighlighted ? this.$el.addClass("highlighted") : this.$el.removeClass("highlighted");
+        this.model.set('highlighted', isHighlighted);
+        this.render();
+        this.model.save();
 
+    }
 });

@@ -27,7 +27,7 @@ button:hover {
 .remove:hover {
     border: 1px solid rgb(0, 0, 0);
     background: rgb(255, 255, 0);
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .galery-item-content {
@@ -44,8 +44,8 @@ button:hover {
     border-style: dotted;
 }
 
-.highlited,
-.highlited:focus {
+.highlighted,
+.highlighted:focus {
     border: thick solid #0000FF;
     background-color: green;
     font-weight: bold;
@@ -63,6 +63,11 @@ button {
     font-size: 20px;
     outline: none;
     cursor: pointer;
+}
+
+span.highlighted{
+     background-color: red;
+      border-radius: 10px;
 }
 
 span {
