@@ -77,7 +77,7 @@ app.BlocksView = Backbone.View.extend({
         if (!this.selectedBlock) {
             // Find first one and highlite it
             this.selectedBlock = this.collection.at(0);
-            this.collection.at(0).trigger("highlight", true);
+            this.collection.at(0) ? this.collection.at(0).trigger("highlight", true) : undefined;
         }
 
         var selectedBlockWidth = document.getElementsByClassName("galery-item")[0].offsetWidth;

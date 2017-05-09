@@ -3,11 +3,16 @@
 var app = app || {};
 
 $(function() {
-	var blocks = [
-	{ highlighted: true, index: 1 },
-	{ highlighted: false, index: 2 }
-	];
 
-	new app.BlocksView();
-    //new app.LibraryView( blocks );
+	var appAll = new app.BlocksView();
+	if (!appAll.collection.size()) {
+
+		for (var i = 0; i <= 51; i++) {
+			appAll.collection.create({
+				highlighted: false,
+				index: appAll.collection.size()
+			});
+		}
+	}
+
 });
