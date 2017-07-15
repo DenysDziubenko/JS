@@ -1,0 +1,8 @@
+<div class="view">
+    <input class="toggle" data-toggle="toggle" type="checkbox" <%=completed ? 'checked' : '' %>>
+    <label><span class="label label-<%= completed ? 'success' : 'warning' %>"><%= completed ? 'Done' : 'Need to do' %></span></label>
+    <label><span class="label label-primary"><%- title %></span></label>
+    <input class="edit" value="<%- title %>">
+    <button class="destroy btn btn-default">x</button>
+</div>
+    

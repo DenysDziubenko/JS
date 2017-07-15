@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>The Todos list</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/application.css">
+  <script data-main="js/init" src="js/library/require.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <section id="todoapp">
+      <div class="jumbotron">
+        <header id="header">
+          <h1><i class="fa fa-list-alt"></i></span> The Todos list </h1>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">What needs to be done?</span>
+            <input id="new-todo" type="text" class="form-control" placeholder="Type task name and press enter" aria-describedby="basic-addon1">
+          </div>
+          <button class="destroyAll btn btn-primary">Remove all items</button>
+          <ul class="nav nav-pills">
+            <li><a href="#/">Show all items</a></li>
+            <li><a href="#/pending">Show pending items</a></li>
+            <li><a href="#/completed">Show completed items</a></li>
+          </ul>
+        </header>
+      </div>
+      
+      <section id="main">
+        <ul id="todo-list" class="list-group"></ul>
+      </section>
+      
+    </section>
+  </div>
+  
+</body>
+</html>

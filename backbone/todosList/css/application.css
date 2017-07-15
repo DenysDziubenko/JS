@@ -1,0 +1,32 @@
+/*
+*	CSS for my application
+*/
+body { 
+    padding-top: 50px; 
+}
+#todoapp ul {
+    list-style-type: none; /* Hides bullet points from todo list */
+}
+.label-primary {
+    cursor: pointer;
+}
+#todo-list input.edit {
+    display: none; /* Hides input box*/
+}
+#todo-list .editing label {
+    display: none; /* Hides label text when .editing*/
+}
+#todo-list .editing input.edit {
+    width: 90%;
+    display: inline; /* Shows input text box when .editing*/
+}
+.destroyAll{
+    margin-top: 15px;
+    margin-left: 15px;
+}
+.destroy.btn{
+    border-radius: 13px;
+}
+.label{ 
+    font-size: 130%; 
+}
