@@ -1,1 +1,1 @@
-# Simple todoMVC example using the Backbone.js, Backbone.localStorage and RequireJS
+# Simple todoMVC example using the Backbone.js, Backbone.localStorage.js and require.js
