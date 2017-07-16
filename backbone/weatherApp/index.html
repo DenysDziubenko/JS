@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <script data-main="js/init" src="js/lib/require.js"></script>
+    <!-- Need to change to your own API_KEY, see readme.md -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=API_KEY"></script>
+</head>
+
+<body>
+    <div id="weatherApp" class="container">
+        <div class="jumbotron">
+            <div class="ui-widget navbar-form" role="search">
+                <div class="form-group">
+                    <h3>Select the country and then the city in the search inputs for showing the current weather.</h3>
+                    <input id="countries" type="text" class="form-control" placeholder="Search for country">
+                    <input id="cities" type="text" class="form-control" placeholder="Search for cities">
+                    <button id="button" type="button" class="btn btn-primary">Get current weather forecast!</button>
+                </div>
+            </div>
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="home active"><a data-toggle="tab" href="#home">Current weather</a></li>
+            <li class="menu1"><a data-toggle="tab" href="#menu1">The 5 day forecast</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <h3>Current weather data for selected city.</h3>
+                <div class="list-group" id="currentWeatherContainer"></div>
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <h3>5 day/3 hour forecast</h3>
+                <div class="list-group" id="5dayForecastContainer"></div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+
+</html>

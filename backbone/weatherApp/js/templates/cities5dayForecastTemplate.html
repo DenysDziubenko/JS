@@ -1,0 +1,57 @@
+<div class="galery-item-content row">
+    <div class="col-sm-12">
+    <ul class="nav nav-pills">
+        <% Object.keys(days).forEach(function(day) { %>
+            <li class=<%= Object.keys(days)[0] === day ? "active" : '' %>><a data-toggle="tab" href="#<%= day %>"><%= day %></a></li>
+        <% }); %>
+    </ul>
+
+         <div class="tab-content">
+            <% Object.keys(days).forEach(function(day) { %>
+                <div id="<%= day %>" class="tab-pane fade <%= Object.keys(days)[0] === day ? "in active" : '' %>">
+                    <h3><%= day %> forecast.</h3>
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <th>Time</th>
+                              <th>Temp-re, [°C]</th>
+                              <th>Pressure, [hPa]</th>
+                              <th>Humidity, [%]</th>
+                              <th>Wind speed/degree, [m/s] [°]</th>
+                              <th>Clouds, [%]</th>
+                              <th>Description</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                    <% Object.keys(days[day]).forEach(function(key) { %>
+                         <% if(days[day][key].main){ %>
+                            <tr>
+                              <th scope="row"><%= key %></th>
+                              <td><%= days[day][key].main.temp %></td>
+                              <td><%= days[day][key].main.pressure %></td>
+                              <td><%= days[day][key].main.humidity %></td>
+                              <td><%= days[day][key].wind.speed %> / <%= days[day][key].wind.deg %></td>
+                              <td><%= days[day][key].clouds.all %>
+                              
+                              <% var rainObj = days[day][key].rain; %>
+                              <% var snowObj = days[day][key].snow; %>
+                               
+                              <% var rainValue = !$.isEmptyObject(rainObj) ? (rainObj.hasOwnProperty('3h') ? rainObj['3h'] : 0) : 0; %>
+                              <% var snowValue = !$.isEmptyObject(snowObj) ? (snowObj.hasOwnProperty('3h') ? snowObj['3h'] : 0) : 0; %>
+                                 
+                                  <img src="http://openweathermap.org/img/w/<%= days[day][key].weather[0].icon %>.png" height="35" width="35" data-placement="top" data-toggle="tooltip" title="rain: <%= rainValue%> mm, snow:<%= snowValue%> mm">
+                              </td>
+                              <td><%= days[day][key].weather[0].main %>, <%= days[day][key].weather[0].description %></td>
+                            </tr>
+                            <% } %>
+                    <% }); %>
+                          </tbody>
+                        </table>
+                    <div class="col-sm-12">
+                        <canvas id="myChart-<%= day %>" width="400" height="100"></canvas>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</div>
