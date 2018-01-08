@@ -1,0 +1,14 @@
+<div *ngIf="thing">
+  <h2>Thing details</h2>
+  <span>id: {{thing._id}}</span>
+  <div class="update-thing">
+    <label>name: <input [(ngModel)]="thing.name" placeholder="name"/></label>
+    <label>scores: <input type="number" name="scores" min="-100" max="100" step="5" [(ngModel)]="thing.scores" placeholder="scores" /></label>
+  </div>
+  <div class="update-thing">
+    <span>description:</span>
+    <textarea [(ngModel)]="thing.description" placeholder="description" rows="7" cols="50"></textarea>
+  </div>
+  <button (click)="save()">save</button>
+  <button (click)="goBack()">go back</button>
+</div>

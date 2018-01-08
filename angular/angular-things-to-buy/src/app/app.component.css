@@ -1,0 +1,18 @@
+nav a {
+  font-size: 1.5em;
+  margin: 20px;
+  padding: 10px 30px;
+  display: inline-block;
+  background-color: #aeb3ee;
+  border-radius: 10px;
+}
+nav a:visited, a:link {
+  color: rgba(255, 255, 0, 1.49);
+}
+nav a:hover {
+  color: #039be5;
+  background-color: #CFD8DC;
+}
+nav a.active {
+  color: #039be5;
+}

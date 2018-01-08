@@ -1,0 +1,23 @@
+<h2>Total list of things</h2>
+<div class="add-thing">
+  <label>Add thing, name:<input size="20" #thingName /></label>
+  <label>short description:<input size="35" #thingDesc /></label>
+  <label>scores:<input type="number" name="scores" min="-100" max="100" step="5" value="0" #thingScore /></label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(thingName.value, thingScore.value, thingDesc.value);
+  thingName.value=''; thingScore.value=''; thingDesc.value='';">
+    add
+  </button>
+</div>
+<div>
+  <ul class="things">
+    <li *ngFor="let thing of things; let i = index">
+      <span class="badge">{{i}}</span>
+      <a routerLink="/thing/{{thing._id}}">{{thing.name}}</a>
+      <button class="delete" title="delete thing"(click)="delete(thing)">x</button>
+      <span class="scores">scores - {{thing.scores}}</span>
+      <span class="description">description - {{thing.description}}</span>
+    </li>
+  </ul>
+</div>
+

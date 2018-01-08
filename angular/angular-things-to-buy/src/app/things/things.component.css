@@ -1,0 +1,127 @@
+label {
+  font-size: 1em;
+  color: rgb(135, 228, 228);
+}
+
+input {
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: none;
+  background-color: #3CBC8D;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  margin-bottom: 0;
+}
+
+input:hover {
+  background-color: #EEE;
+  cursor: pointer;
+  color: #607d8b;
+}
+
+button {
+  background-color: rgba(175, 76, 140, 0.75);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.add-thing{
+  margin: 10px;
+}
+
+button:hover{
+  cursor: pointer;
+  background-color: #dc4a46;
+  color: #aeb3ee;
+}
+
+.things {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  background-color: rgb(159, 234, 116);
+  margin: .5em;
+  padding: .3em 0;
+  border-radius: 10px;
+  width: 70%;
+}
+
+.things li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+}
+
+.things .badge {
+  float: left;
+  color: white;
+  background-color: #3CBC8D;
+  padding: 0.8em 0.7em 0 0.7em;
+  line-height: 1em;
+  height: 1.8em;
+  min-width: 16px;
+  margin-right: .8em;
+  border-radius: 10px 0 0 10px;
+}
+
+.things a {
+  color: white;
+  text-decoration: none;
+  font-size: 2em;
+  display: inline-block;
+  width: 250px;
+  white-space: nowrap;
+  overflow:hidden !important;
+  text-overflow: ellipsis;
+}
+
+.things .description {
+  margin-right: 5px;
+  float: right;
+  display: inline-block;
+  width: 400px;
+  white-space: nowrap;
+  overflow:hidden !important;
+  text-overflow: ellipsis;
+  background-color: #aeb3ee;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 10px 10px;
+  font-size: 1em;
+}
+
+.things .scores {
+  margin-right: 5px;
+  float: right;
+  background-color: #aeb3ee;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 10px 10px;
+  font-size: 1em;
+}
+
+.things button {
+  margin-right: 5px;
+  float: right;
+}
+
+.things a:hover {
+  cursor: pointer;
+  color: rgba(255, 255, 0, 1.49);
+}
+

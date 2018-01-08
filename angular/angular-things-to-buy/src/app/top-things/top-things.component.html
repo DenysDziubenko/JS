@@ -1,0 +1,7 @@
+<h2>Top things</h2>
+<div class="top-things">
+  <div class="thing-content" *ngFor="let thing of things">
+    <a routerLink="/thing/{{thing._id}}">{{thing.name}}</a>
+  </div>
+</div>
+<app-search-things></app-search-things>
