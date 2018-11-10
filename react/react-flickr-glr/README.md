@@ -1,6 +1,6 @@
 # Simple gallery application using the React and Flickr API
 
-### [Website live example](https://react-flickr-glr.herokuapp.com/)
+### [Website live example](https://react-flickr-glr-app.herokuapp.com/)
 
 ## Note:
 * The API_KEY should be added in the following file react-flickr-glr/src/api/photos.js.
