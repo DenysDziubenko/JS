@@ -12,9 +12,13 @@ To run the app locally:
 clone this repo
 cd angular-things-to-buy
 npm install
-run `node server.js` #for upping back-end server
-run `npm start` #for a front-dev server(see the package.json and proxy.conf.json files for more info)
+run `npm run start-dev` for running application in development mode.
+The front-end(port 8091) and back-end(port 8090) servers would be running in that case.
 open http://localhost:8091/
+
+run `npm run start-prod` for running application in production mode.
+The back-end(port 8090) server would be running in that case.
+open http://localhost:8090/
 ```
 
 ## Build
@@ -28,3 +32,5 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+### [Website live example](https://angular-things-to-buy-app.herokuapp.com)

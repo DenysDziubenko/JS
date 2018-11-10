@@ -2,22 +2,21 @@ let bodyParser = require("body-parser"),
 	mongoose = require("mongoose"),
 	express = require("express"),
 	app = express(),
-  thingToBuySchema = new mongoose.Schema({
+    path = require('path'),
+    thingToBuySchema = new mongoose.Schema({
     name: String,
     description: { type: String, default: 'add some description' },
     scores: { type: Number, default: 0 }
   }),
 	ThingToBuy = mongoose.model("ThingToBuy", thingToBuySchema);
 
-mongoose.connect("mongodb://localhost/angular-things-to-buy", {
-  useMongoClient: true
-});
-app.use(express.static("public"));
+mongoose.connect("mongodb://localhost/angular-things-to-buy");
+app.use(express.static(path.join(__dirname, 'dist')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.set('port', process.env.PORT || 8090);
 
-app.get("/things", (req, res) => {
+app.get("/api/things", (req, res) => {
 	let query = req.query.name ? {"name" : {$regex : ".*" + req.query.name + ".*"}} : {};
   ThingToBuy.find( query , (err, things) => {
     let sortedThings = things.sort((thingA, thingB) =>{ return thingB.scores - thingA.scores});
@@ -25,25 +24,29 @@ app.get("/things", (req, res) => {
   });
 });
 
-app.get("/things/:id", (req, res) => {
+app.get("/api/things/:id", (req, res) => {
   ThingToBuy.findById(req.params.id, (err, foundThing) => { return err ? logErr(err) : res.send(foundThing) });
 });
 
-app.post("/things", (req, res) => {
+app.post("/api/things", (req, res) => {
   ThingToBuy.create(req.body, (err, newThing) => { return err ? logErr(err) : res.send(newThing) });
 });
 
-app.put("/things", (req, res) => {
+app.put("/api/things", (req, res) => {
 	let updates = { $set: { name: req.body.name, description: req.body.description, scores: req.body.scores } };
   ThingToBuy.findByIdAndUpdate(req.body._id, updates, (err, updatedThing) => {
 		return err ? logErr(err) : res.send(updatedThing);
 	});
 });
 
-app.delete("/things/:id", (req, res) => {
+app.delete("/api/things/:id", (req, res) => {
   ThingToBuy.findByIdAndRemove(req.params.id, (err) => {
 		return err ? logErr(err) : res.json({ ok: true });
 	});
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
 let logErr = (err) => {

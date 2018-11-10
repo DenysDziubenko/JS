@@ -11,7 +11,7 @@ const httpOptions = {
 @Injectable()
 export class ThingService {
 
-  private thingsUrl = '/things';
+  private thingsUrl = 'api/things';
 
   constructor(
     private http: HttpClient) { }
