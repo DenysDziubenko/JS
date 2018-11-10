@@ -2,6 +2,8 @@
 Simple things to buy application using the Angular and Express as back-end.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.0.
 
+### [Website live example](https://angular-things-to-buy-app.herokuapp.com)
+
 ## Development server
 
 Firstly, [Install MongoDB](https://docs.mongodb.com/manual/installation/) and run
@@ -32,5 +34,3 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-### [Website live example](https://angular-things-to-buy-app.herokuapp.com)
